@@ -8,13 +8,13 @@ class Login extends Component {
     };
 
     state = {
-        username: '',
+        email: '',
         password: ''
     };
 
     componentWillMount(){
         this.setState({
-            username: '',
+            email: '',
             password: ''
         });
     }
@@ -22,7 +22,7 @@ class Login extends Component {
     render() {
         return (
             <div className="row justify-content-md-center">
-                <div className="col-md-3">
+                <div className="col-md-10">
                     <form>
                         <div className="form-group">
                             <h1>Login</h1>
@@ -33,10 +33,10 @@ class Login extends Component {
                                 type="text"
                                 label="Username"
                                 placeholder="Enter Username"
-                                value={this.state.username}
+                                value={this.state.email}
                                 onChange={(event) => {
                                     this.setState({
-                                        username: event.target.value
+                                        email: event.target.value
                                     });
                                 }}
                             />

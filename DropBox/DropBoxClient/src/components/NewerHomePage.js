@@ -5,13 +5,16 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import Message from "./Message";
 import Welcome from "./Welcome";
+import About from "./About";
+import DisplayUserDetails from "./DisplayUserDetails";
 
 class NewerHomePage extends Component {
 
     state = {
         isLoggedIn: false,
         message: '',
-        username: ''
+        email: '',
+      //    images: []
     };
 
     handleSubmit = (userdata) => {
@@ -21,7 +24,7 @@ class NewerHomePage extends Component {
                     this.setState({
                         isLoggedIn: true,
                         message: "Welcome to my App..!!",
-                        username: userdata.username
+                        email: userdata.email
                     });
                     this.props.history.push("/welcome");
                 } else if (status === 401) {
@@ -40,20 +43,76 @@ class NewerHomePage extends Component {
                     this.setState({
                         isLoggedIn: true,
                         message: "SignIn Successfull!!",
-                        username: userdata.username
+                        email: userdata.email
                     });
                   }
             });
     };
 
+    handleUserDetails = (userdata) => {
+        API.UserInfo(userdata)
+            .then((status) => {
+                if (status === 201) {
+                    this.setState({
+                        isLoggedIn: true,
+                        message: "Details Successfull!!",
+                        email: userdata.email
+                    });
+                  }
+            });
+    };
+
+    handleDisplayUser = (userdata) => {
+        API.DisplayUserInfo(userdata)
+            .then((status) => {
+              //  if (status === 201) {
+                    this.setState({
+                        message: "displayed data Successfull!!",
+                        email: userdata.email,
+                        firstname: userdata.firstname
+                    });
+//}
+            });
+    };
+
+    handleListDirectory = (userdata) => {
+        API.doListDir(userdata)
+            .then((status) => {
+                if (status === 201) {
+                    this.setState({
+                        isLoggedIn: true,
+                        message: "Directory Listed Successfull!!",
+                      });
+                  }
+            });
+    };
+
+/*    handleFileUpload = (event) => {
+        const payload = new FormData();
+        payload.append('mypic', event.target.files[0]);
+        API.uploadFile(payload)
+            .then((status) => {
+                if (status === 204) {
+                    API.getImages()
+                        .then((data) => {
+                            this.setState({
+                                images: data
+                            });
+                        });
+                }
+            });
+
+    };
+*/
     render() {
         return (
 
             <div className="container-fluid">
+                <h1> DropBox !!</h1>
+                <div className="row">
 
                 <Route exact path="/" render={() => (
-                    <div>
-                        <Message message="You have landed on my App !!"/>
+                  <div className="col-sm-6" >
                         <button className="btn btn-success" onClick={() => {
                             this.props.history.push("/login");
                         }}>
@@ -63,8 +122,7 @@ class NewerHomePage extends Component {
                 )}/>
 
                 <Route exact path="/" render={() => (
-                    <div>
-
+                    <div className="col-sm-6" >
                         <button className="btn btn-success" onClick={() => {
                             this.props.history.push("/signup");
                         }}>
@@ -80,6 +138,15 @@ class NewerHomePage extends Component {
                     </div>
                 )}/>
 
+                <Route exact path="/about" render={() => (
+                  <div>
+                    <About email={this.state.email}
+                    handleUserDetails={this.handleUserDetails}/>
+                    <Message message={this.state.message}/>
+
+                    </div>
+                )}/>
+
                 <Route exact path="/login" render={() => (
                     <div>
                         <Login handleSubmit={this.handleSubmit}/>
@@ -88,11 +155,22 @@ class NewerHomePage extends Component {
                 )}/>
 
                 <Route exact path="/welcome" render={() => (
-                    <Welcome username={this.state.username}/>
+                  <div>
+                    <Welcome email={this.state.email}/>
+                      <Message message={this.state.message}/>
+                    </div>
+                )}/>
+
+                <Route exact path="/DisplayUserDetails" render={() => (
+                        <div>
+                            <DisplayUserDetails email={this.state.email}
+                            handleDisplayUser={this.handleDisplayUser}/>
+
+                        </div>
                 )}/>
 
             </div>
-
+            </div>
         );
     }
 }

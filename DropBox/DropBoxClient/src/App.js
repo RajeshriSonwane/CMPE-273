@@ -1,13 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
 
-// import HomePage from "./components/HomePage";
-
-
 import {BrowserRouter} from 'react-router-dom';
 import NewerHomePage from "./components/NewerHomePage";
-
-// import HomePage from "./components/HomePage";
 
     class App extends Component {
         render() {
@@ -16,7 +11,7 @@ import NewerHomePage from "./components/NewerHomePage";
                     <BrowserRouter>
 
                         <NewerHomePage/>
-                    
+
                     </BrowserRouter>
                 </div>
             );

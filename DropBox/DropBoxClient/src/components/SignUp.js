@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import { Route, withRouter } from 'react-router-dom';
+import * as API from '../api/API';
+import Message from "./Message";
+import About from "./About";
 
 class SignUp extends Component {
 
@@ -26,7 +30,9 @@ class SignUp extends Component {
     render() {
         return (
           <div className="row justify-content-md-center">
-            <div className="col-md-3">
+
+            <div className="col-md-10">
+
                 <form>
                     <div className="form-group">
                         <h1>SignUp</h1>
@@ -98,12 +104,33 @@ class SignUp extends Component {
                             onClick={() => this.props.handleSignUp(this.state)}>
                             Sign Up
                         </button>
+                        <hr></hr>
                     </div>
+
+                    <hr></hr>
+
                 </form>
+
+                <Route exact path="/signup" render={() => (
+                  <div>
+                        <button className="btn btn-success" onClick={() => {
+                            this.props.history.push("/about");
+                        }}>
+                        About
+                    </button>
+                    </div>
+                )}/>
+
+                <Route exact path="/about" render={() => (
+                        <div>
+                            <About handleUserDetails={this.handleUserDetails}/>
+                            <Message message={this.state.message}/>
+                        </div>
+                )}/>
             </div>
         </div>
         );
     }
 }
 
-export default SignUp;
+export default withRouter(SignUp);
