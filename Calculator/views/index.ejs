@@ -1,11 +1,65 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<head>
+<title>Login</title>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-6">
+				<form action="/calculate" method="post"> 
+					<!-- This panel is for login -->
+					<div class="panel panel-primary">
+						<!-- Default panel contents -->
+						<div class="panel-heading">Calculator</div>
+						<div class="panel-body">
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<div class="col-sm-10">
+										Number 1  <input type="number" class="form-control" name="num1"
+											id="num1">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									
+									<div class="col-sm-10">
+										Operation <input type="text" class="form-control" name="operation"
+											id="operation">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-sm-10">
+										Number 2  <input type="number" class="form-control" name="num2"
+											id="num2">
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="col-sm-10">
+										 Answer = <%= title %>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<div class="pull-left signIn">
+										<button type="submit" class="btn btn-primary">Calculate</button>
+									</div>
+									
+								</div>
+							</form>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
 </html>
