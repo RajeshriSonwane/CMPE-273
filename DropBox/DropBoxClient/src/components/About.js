@@ -34,7 +34,7 @@ class About extends Component {
     render() {
         return (
           <div className="row justify-content-md-center">
-            <div className="col-md-10">
+            <div className="col-md-4">
                 <form>
                     <div className="form-group">
                         <h1>Enter User Info</h1>

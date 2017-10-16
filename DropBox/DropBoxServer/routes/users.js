@@ -2,27 +2,12 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('./mysql');
 var fs = require('fs');
-//var multer = require('multer');
-//var glob = require('glob');
 var testFolder = './routes/';
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {
     res.send('respond with a resource');
 });
-
-/*
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, './public/uploads/')
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now() + '.jpeg')
-    }
-});
-
-var upload = multer({storage:storage});
-*/
 
 router.post('/doLogin', function (req, res, next) {
 
@@ -119,50 +104,7 @@ router.post('/DisplayUserInfo', function (req, res, next) {
 		}
 	}, getAllUsers);
   console.console.log(results);
-
-    res.status(201).json({message: results});
-        return(results);
+    res.status(200).json({results});
 });
-
-router.post('/doListDir', function (req, res, next) {
-    var response = "";
-	   var testFolder = req.body.dirpath;
-	  console.log(testFolder);
-	  fs.readdir(testFolder, function (err, files)
-	  {
-		     console.log(files.length);
-		     console.log(files);
-		     for(var i=0;i<files.length;i++)
-		     {
-		           response += files[i]+"<br>";
-		     }
-         res.send(response);
-	  });
-});
-
-/*
-router.get('/', function (req, res, next) {
-    var resArr = [];
-    glob("public/uploads/*.jpeg", function (er, files) {
-
-        var resArr = files.map(function (file) {
-            var imgJSON = {};
-            imgJSON.img = 'uploads/'+file.split('/')[2];
-            imgJSON.cols = 2  ;
-            return imgJSON;
-        });
-
-        console.log(resArr);
-        res.status(200).send(resArr);
-    });
-
-});
-
-router.post('/upload', upload.single('mypic'), function (req, res, next) {
-    console.log(req.body);
-    console.log(req.file);
-    res.status(204).end();
-});
-*/
 
 module.exports = router;

@@ -31,7 +31,7 @@ class SignUp extends Component {
         return (
           <div className="row justify-content-md-center">
 
-            <div className="col-md-10">
+            <div className="col-md-4">
 
                 <form>
                     <div className="form-group">

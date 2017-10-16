@@ -6,10 +6,11 @@ class DisplayUserDetails extends Component {
 
     static propTypes = {
         DisplayUserDetails: PropTypes.func.isRequired,
-          email: PropTypes.string.isRequired
+          results: PropTypes.string.isRequired
     };
 
     state = {
+        results : this.props.results,
         email : '',
         userOverview: '',
         work: '',
@@ -21,7 +22,7 @@ class DisplayUserDetails extends Component {
 
     componentWillMount(){
         this.setState({
-          email : this.props.email,
+          results : this.props.results,
           userOverview: '',
           work: '',
           education: '',
@@ -31,16 +32,21 @@ class DisplayUserDetails extends Component {
         });
     }
 
+    componentDidMount(){
+        document.title = `Welcome, ${this.state.results} !!`;
+    }
+
     render() {
         return (
           <div className="row justify-content-md-center">
-            <div className="col-md-10">
+            <div className="col-md-4">
                 <form>
-                    <div className="form-group">
-                        <h1> User Details</h1>
-                    </div>
+                <div>
+                    {this.state.results}
+                </div>
 
-                    <h1>res.UserID</h1>
+                    <h1></h1>
+
                     <Link to="/welcome">Back</Link>
                 </form>
             </div>
