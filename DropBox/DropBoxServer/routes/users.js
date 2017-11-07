@@ -83,28 +83,29 @@ router.post('/DisplayUserInfo', function (req, res, next) {
 
     var reqUserID = req.body.email;
 
-    var getAllUsers = "SELECT firstname, lastname, UserID, userOverview, work, education, ContactNo, lifeEvents, "+
-    "interests FROM user, UserDetails where user.email = UserDetails.UserID and user.email = "+ reqUserID  +";";
-	console.log("Query is:" + getAllUsers);
+    var getAllUsers = "SELECT * FROM user where email = '"+ reqUserID  +"';";
+	   console.log("Query is:" + getAllUsers);
 
-	mysql.fetchData(function(err, results) {
-		if (err) {
-			throw err;
-		} else {
-			if (results.length > 0) {
-				var rows = results;
-				var jsonString = JSON.stringify(results);
-				var jsonParse = JSON.parse(jsonString);
-        console.console.log(jsonString);
-        console.console.log(jsonParse);
-				console.log("Results Type: " + (typeof results));
-			} else {
-				console.log("No users found in database");
-			}
-		}
-	}, getAllUsers);
-  console.console.log(results);
-    res.status(200).json({results});
+    	mysql.fetchData(function(err, results) {
+    		if (err) {
+    			console.log(err);
+        		} else {
+        			if (results.length > 0) {
+                console.log(results);
+        				var rows = results;
+        				var jsonString = JSON.stringify(results);
+        				var jsonParse = JSON.parse(jsonString);
+                console.log(jsonString);
+                console.log(jsonParse);
+        				console.log("Results Type: " + (typeof results));
+                return res.status(201).send({uname: results.username, lname: results.lastname, email: results.email, password: results.password });
+        			} else {
+        				console.log("No users found in database");
+                return res.status(500);
+        			}
+        		}
+        	}, getAllUsers);
+
 });
 
 module.exports = router;

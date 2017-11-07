@@ -137,7 +137,7 @@ class About extends Component {
                             Submit
                         </button>
                     </div>
-                    <Link to="/NewerHomePage">Back</Link>
+                    <Link to="/login">Back</Link>
                 </form>
             </div>
         </div>

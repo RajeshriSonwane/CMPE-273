@@ -6,34 +6,26 @@ class DisplayUserDetails extends Component {
 
     static propTypes = {
         DisplayUserDetails: PropTypes.func.isRequired,
-          results: PropTypes.string.isRequired
+        username: PropTypes.string.isRequired,
+        lastname: PropTypes.string.isRequired,
+        email: PropTypes.string.isRequired,
+        password: PropTypes.string.isRequired,
     };
 
     state = {
-        results : this.props.results,
-        email : '',
-        userOverview: '',
-        work: '',
-        education: '',
-        ContactNo: '',
-        lifeEvents: '',
-        interests: ''
+        username: '',
+        lastname: '',
+        email: '',
+        password: ''
     };
 
     componentWillMount(){
         this.setState({
-          results : this.props.results,
-          userOverview: '',
-          work: '',
-          education: '',
-          ContactNo: '',
-          lifeEvents: '',
-          interests: ''
+           username: this.props.username,
+           lastname: this.props.lastname,
+           email: this.props.email,
+           password: this.props.password,
         });
-    }
-
-    componentDidMount(){
-        document.title = `Welcome, ${this.state.results} !!`;
     }
 
     render() {
@@ -41,11 +33,11 @@ class DisplayUserDetails extends Component {
           <div className="row justify-content-md-center">
             <div className="col-md-4">
                 <form>
-                <div>
-                    {this.state.results}
-                </div>
-
-                    <h1></h1>
+                    <h2>User Information</h2>
+                    <h6>User Name:{this.state.username}</h6>
+                    <h6>Last Name:{this.state.lastname}</h6>
+                    <h6>Email:{this.state.email}</h6>
+                    <h6>password:{this.state.password}</h6>
 
                     <Link to="/welcome">Back</Link>
                 </form>

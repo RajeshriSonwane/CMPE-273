@@ -8,16 +8,26 @@ import DisplayUserDetails from "./DisplayUserDetails";
 class Welcome extends Component {
 
     static propTypes = {
-        email: PropTypes.string.isRequired
+          email: PropTypes.string.isRequired,
+          username: PropTypes.string.isRequired,
+          lastname: PropTypes.string.isRequired,
+          password: PropTypes.string.isRequired,
+          handleDisplayUser: PropTypes.func.isRequired
     };
 
     state = {
-        email : ''
+       username: '',
+       lastname: '',
+       email: '',
+       password: '',
     };
 
     componentWillMount(){
         this.setState({
-            email : this.props.email
+            username: this.state.username,
+            lastname: this.state.lastname,
+            email: this.state.email,
+            password: this.state.password,
         });
     }
 
@@ -32,7 +42,8 @@ class Welcome extends Component {
           <Route exact path="/welcome" render={() => (
               <div className="col-sm-6" >
                   <text className="btn btn-success"  onClick={() => {
-                          this.props.history.push("/DisplayUserDetails");
+                          this.props.history.push("/DisplayUserDetails"),
+                          this.props.handleDisplayUser(this.state);
                       }}>
                   User Details
                   </text>
@@ -41,11 +52,14 @@ class Welcome extends Component {
 
           <Route exact path="/DisplayUserDetails" render={() => (
                   <div>
-                      this.props.handleUserDetails(this.state),
-                      <DisplayUserDetails handleDisplayUser={this.handleDisplayUser}/>
-                      <Message message={this.state.message}/>
+                      <DisplayUserDetails handleDisplayUser={this.handleDisplayUser} username={this.state.username} lastname={this.state.lastname}
+                      email={this.state.email} password={this.state.password}/>
                   </div>
           )}/>
+
+          <div className="col-md-4">
+            <Link to="/login">Logout</Link>
+          </div>
         </div>
 
           <div className='homecontent'>
@@ -54,25 +68,19 @@ class Welcome extends Component {
                 <div className="alert alert-warning" role="alert">
                   {this.state.email}, welcome to my App..!!
                 </div>
+                <hr></hr>
               </div>
             </div>
           </div>
 
           <div className='hometab2'>
-                    <Link to="/login">Logout</Link>
-                    <hr></hr>
-
-                      <h5>Select file to upload</h5>
-                    <input
-                       className={'fileupload'}
-                       type="file"
-                       name="myfile"
-                       onChange={this.handleFileUpload}
-                   />
-                   <button>Upload</button>
+                <div className="row justify-content-md-center">
+                  <h5>Select file to upload</h5>
+                  <input className={'fileupload'} type="file" name="myfile" onChange={this.handleFileUpload}/>
+                  <button>Upload</button>
                 </div>
-            </div>
-
+          </div>
+        </div>
         )
     }
 }

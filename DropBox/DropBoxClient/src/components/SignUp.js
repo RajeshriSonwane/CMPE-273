@@ -96,16 +96,30 @@ class SignUp extends Component {
                             }}
                         />
                     </div>
-
-                    <div className="form-group">
-                        <button
-                            className="btn btn-primary"
-                            type="button"
-                            onClick={() => this.props.handleSignUp(this.state)}>
+                    <div className="row">
+                    <div className="col-xs-6 col-sm-6 col-md-6">
+                        <button className="btn btn-primary" type="button" onClick={() => this.props.handleSignUp(this.state)}>
                             Sign Up
                         </button>
                     </div>
-                    <Link to="/Login">Back</Link>
+
+                    <Route exact path="/signup" render={() => (
+                      <div className="col-xs-6 col-sm-6 col-md-6">
+                        <button className="btn btn-primary" onClick={() => {this.props.history.push("/about");}}>
+                        About
+                    </button>
+                    </div>
+                    )}/>
+                    </div>
+
+                    <Route exact path="/about" render={() => (
+                        <div>
+                            <About handleUserDetails={this.handleUserDetails}/>
+                            <Message message={this.state.message}/>
+                        </div>
+                      )}/>
+
+                    <Link to="/login">Back</Link>
                 </form>
             </div>
         </div>

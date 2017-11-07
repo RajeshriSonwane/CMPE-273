@@ -15,8 +15,11 @@ class NewerHomePage extends Component {
     state = {
         isLoggedIn: false,
         message: '',
+        username: '',
+        lastname: '',
         email: '',
-        results: ''
+        password: '',
+        dirStructure: ''
     };
 
     handleSubmit = (userdata) => {
@@ -45,7 +48,10 @@ class NewerHomePage extends Component {
                     this.setState({
                         isLoggedIn: true,
                         message: "SignIn Successfull!!",
-                        email: userdata.email
+                        email: userdata.email,
+                        username: userdata.username,
+                        lastname: userdata.lastname,
+                        password: userdata.password
                     });
                   }
             });
@@ -64,28 +70,27 @@ class NewerHomePage extends Component {
             });
     };
 
-    handleDisplayUser = (userdata) => {
-        API.DisplayUserInfo(userdata)
-            .then((res) => {
-              if (res.status === 200) {
-                   res.json().then( data => {
-                           this.setState({...this.state,
-                               results: data
-                           });
-                       }
-                   )
-               }
-           })
-         };
+   handleDisplayUser = (userdata) => {
+      API.DisplayUserInfo(userdata)
+          .then((res) => {
+                  this.setState({
+                        username: res.uname,
+                        lastname: res.lname,
+                        email: res.email,
+                        password: res.password
+                  });
+          });
+  };
 
     render() {
       return (
           <div className="container-fluid">
 
-          <div className="row justify-content-md-center">
-              <img src={dropboxIcon} />
-          </div>
-          <hr></hr>
+            <div className="row justify-content-md-center">
+                <img src={dropboxIcon} />
+            </div>
+
+            <hr></hr>
 
             <Route exact path="/" render={() => (
                     <Redirect to="/login" />
@@ -98,40 +103,34 @@ class NewerHomePage extends Component {
                 </div>
             )}/>
 
-              <Route exact path="/signup" render={() => (
-                  <div>
-                      <SignUp handleSignUp={this.handleSignUp}/>
-                      <Message message={this.state.message}/>
-                  </div>
-              )}/>
-
-              <Route exact path="/about" render={() => (
+            <Route exact path="/signup" render={() => (
                 <div>
-                  <About email={this.state.email}
-                  handleUserDetails={this.handleUserDetails}/>
+                    <SignUp handleSignUp={this.handleSignUp}/>
+                    <Message message={this.state.message}/>
+                </div>
+            )}/>
+
+            <Route exact path="/about" render={() => (
+              <div>
+                  <About email={this.state.email} handleUserDetails={this.handleUserDetails}/>
                   <Message message={this.state.message}/>
+                </div>
+            )}/>
 
-                  </div>
-              )}/>
+            <Route exact path="/welcome" render={() => (
+              <div>
+                <Welcome email={this.state.email} handleDisplayUser={this.handleDisplayUser} />
+                </div>
+            )}/>
 
+            <Route exact path="/DisplayUserDetails" render={() => (
+              <div>
+                <DisplayUserDetails username={this.state.username} lastname={this.state.lastname}
+                email={this.state.email} password={this.state.password} />
+                </div>
+            )}/>
 
-
-              <Route exact path="/welcome" render={() => (
-                <div>
-                  <Welcome email={this.state.email}/>
-                  </div>
-              )}/>
-
-              <Route exact path="/DisplayUserDetails" render={() => (
-                      <div>
-                          <DisplayUserDetails results={this.state.results}
-                          handleDisplayUser={this.handleDisplayUser}/>
-                          <Message message={this.state.message}/>
-                      </div>
-              )}/>
-
-          </div>
-
+        </div>
       );
   }
 }
