@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { Route, withRouter } from 'react-router-dom';
+import { Redirect} from 'react-router';
 import * as API from '../api/API';
 import Login from "./Login";
 import SignUp from "./SignUp";
@@ -7,7 +8,7 @@ import Message from "./Message";
 import Welcome from "./Welcome";
 import About from "./About";
 import DisplayUserDetails from "./DisplayUserDetails";
-import dropbox from './dropbox.jpeg';
+import dropboxIcon from './Dropbox_icon.JPG';
 
 class NewerHomePage extends Component {
 
@@ -80,29 +81,22 @@ class NewerHomePage extends Component {
     render() {
       return (
           <div className="container-fluid">
-          <div className="row">
-          </div>
-              <img src={dropbox} />
 
-              <Route exact path="/" render={() => (
-                <div className="col-sm-4" >
-                      <button className="btn btn-success" onClick={() => {
-                          this.props.history.push("/login");
-                      }}>
-                          Login
-                      </button>
-                  </div>
-              )}/>
-              <hr></hr>
-              <Route exact path="/" render={() => (
-                  <div className="col-sm-4" >
-                      <button className="btn btn-success" onClick={() => {
-                          this.props.history.push("/signup");
-                      }}>
-                          SignUp
-                      </button>
-                  </div>
-              )}/>
+          <div className="row justify-content-md-center">
+              <img src={dropboxIcon} />
+          </div>
+          <hr></hr>
+
+            <Route exact path="/" render={() => (
+                    <Redirect to="/login" />
+            )}/>
+
+            <Route exact path="/login" render={() => (
+                <div>
+                    <Login handleSubmit={this.handleSubmit}/>
+                    <Message message={this.state.message}/>
+                </div>
+            )}/>
 
               <Route exact path="/signup" render={() => (
                   <div>
@@ -120,17 +114,11 @@ class NewerHomePage extends Component {
                   </div>
               )}/>
 
-              <Route exact path="/login" render={() => (
-                  <div>
-                      <Login handleSubmit={this.handleSubmit}/>
-                      <Message message={this.state.message}/>
-                  </div>
-              )}/>
+
 
               <Route exact path="/welcome" render={() => (
                 <div>
                   <Welcome email={this.state.email}/>
-
                   </div>
               )}/>
 
@@ -143,7 +131,7 @@ class NewerHomePage extends Component {
               )}/>
 
           </div>
-          
+
       );
   }
 }

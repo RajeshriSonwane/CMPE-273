@@ -9,9 +9,7 @@ import NewerHomePage from "./components/NewerHomePage";
             return (
                 <div className="App">
                     <BrowserRouter>
-
                         <NewerHomePage/>
-
                     </BrowserRouter>
                 </div>
             );
