@@ -6,7 +6,7 @@ var kafka = require('./kafka/client');
 module.exports = function(passport) {
     passport.use('login', new LocalStrategy(function(username , password, done) {
         console.log('in passport');
-        kafka.make_request('topic2',{"username":username,"password":password, "key":"login_api"}, function(err,results){
+        kafka.make_request('topic3',{"username":username,"password":password, "key":"login_api"}, function(err,results){
             console.log('in result');
             console.log(results);
             if(err){

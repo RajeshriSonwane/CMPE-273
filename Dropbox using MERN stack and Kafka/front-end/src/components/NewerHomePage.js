@@ -7,6 +7,7 @@ import Message from "./Message";
 import Welcome from "./Welcome";
 import SignUp from "./SignUp";
 import About from "./About";
+import UserAccount from "./UserAccount";
 import dropboxIcon from './Dropbox_icon.JPG';
 
 class NewerHomePage extends Component {
@@ -121,9 +122,14 @@ class NewerHomePage extends Component {
 
                 <Route exact path="/about" render={() => (
                     <div>
-                        <About email={this.state.email} handleUserDetails={this.handleUserDetails}/>
-                        <Message message={this.state.message}/>
+                        <About username={this.state.username} handleUserDetails={this.handleUserDetails}/>
                     </div>
+                 )}/>
+
+                 <Route exact path="/UserAccount" render={() => (
+                     <div>
+                         <UserAccount username={this.state.username} handleSubmit={this.handleSubmit}/>
+                     </div>
                  )}/>
             </div>
         );

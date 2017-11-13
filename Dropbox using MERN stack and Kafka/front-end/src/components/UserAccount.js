@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import newFolder from './newFolder.JPG';
 import sharedFolder from './sharedFolder.JPG';
 import ImageGridList from "./ImageGridList";
-import UserAccount from "./UserAccount";
-import * as API from '../api/API';
+import Welcome from "./Welcome";
 import { Route, withRouter } from 'react-router-dom';
+import * as API from '../api/API';
 
-class Welcome extends Component {
+class UserAccount extends Component {
 
     static propTypes = {
         username: PropTypes.string.isRequired,
@@ -128,19 +128,13 @@ class Welcome extends Component {
        };
         return(
           <div>
-              <div className="row justify-content-md-center">
-                <div className="col-md-3">
-                        {this.state.username}, welcome to my App..!!
-                </div>
-              </div>
-
               <div className="container-fluid">
                     <div>
                         <div className="row">
                             <div className="col-md-2" style={sty}>
                                  <a href='/welcome'><img  style={styImg}/></a><br/>
                                 <a href='/welcome'><h4 style={textStyle}>Home</h4></a>
-                                <a href='/UserAccount' ><h4 style={textStyle2}>User Accounts</h4></a>
+                                <a href='/userAccount' ><h4 style={textStyle2}>User Accounts</h4></a>
                                 <a><h4 style={textStyle2} onClick={() => this.props.handleListDirectory(this.state)}>My Files</h4></a>
                                 <a href={Welcome} ><h4 style={textStyle2}>Paper<input type='Button' style={button} value='New' className="btn btn-primary" /></h4></a>
                             </div>
@@ -148,20 +142,12 @@ class Welcome extends Component {
                                 <div className="input-group stylish-input-group">
                                     <input type="text" className="form-control"  placeholder="Search"/>
                                     <span className="input-group-addon">
-                                      
+                                        <button type="submit">
+                                            <span className="glyphicon glyphicon-search"></span>
+                                        </button>
                                     </span>
                                 </div>
-                                <h3 style={myStyle}>Home</h3><br/>
-                                <h5 style={myStyle}>Starred</h5><hr/><br/><hr/>
-                                <h5 style={myStyle}>My Files</h5>
-
-
-                                <ul>
-                                      <h6 style={myStyle}>{this.props.dirStructure[0]}</h6>
-                                      <h6 style={myStyle}>{this.props.dirStructure[1]}</h6>
-                                      <h6 style={myStyle}>{this.props.dirStructure[2]}</h6>
-                                      <h6 style={myStyle}>{this.props.dirStructure[3]}</h6>
-                                </ul>
+                                <h3 style={myStyle}>User Account Details</h3><br/>
 
                             </div>
                             <div className="col-md-2">
@@ -181,12 +167,12 @@ class Welcome extends Component {
                     </div>
                 </div>
 
-                <Route exact path="/UserAccount" render={() => (
-                        <UserAccount />
+                <Route exact path="/welcome" render={() => (
+                        <welcome />
                 )}/>
           </div>
         )
     }
 }
 
-export default Welcome;
+export default UserAccount;

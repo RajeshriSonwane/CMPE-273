@@ -129,7 +129,7 @@ app.post('/signup', function(req, res) {
                "reqPassword" : req.body.password,
                "key"       : "signup_api"
            }
-           kafka.make_request('topic1',user_data, function(err,response_kafka){
+           kafka.make_request('topic3',user_data, function(err,response_kafka){
                if(err){
                    console.trace(err);
                    res.status(401).json({error: err});
@@ -161,7 +161,7 @@ app.post('/submitUserInfo', function (req, res, next) {
              "reqinterests" : req.body.interests,
              "key"       : "submitAbout_api"
          }
-         kafka.make_request('topic1',user_data, function(err,response_kafka){
+         kafka.make_request('topic3',user_data, function(err,response_kafka){
              if(err){
                  console.trace(err);
                  res.status(401).json({error: err});
@@ -182,7 +182,7 @@ app.post('/submitUserInfo', function (req, res, next) {
 app.post('/listdir', function(req, res) {
         var reqUsername = req.body.username;
         try{
-          kafka.make_request('topic2',{username: reqUsername, key : "listDir_api"}, function(err,test5res){
+          kafka.make_request('topic3',{username: reqUsername, key : "listDir_api"}, function(err,test5res){
             if(err){
                 res.status(401).json({error: err});
             }

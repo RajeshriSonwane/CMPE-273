@@ -22,6 +22,27 @@ class Login extends Component {
     }
 
     render() {
+      var myStyle = {
+            textAlign:'left',
+            fontSize: 20
+        };
+        var myStyle2 = {
+            textAlign:'left',
+            fontSize: 13
+        };
+        var myStyle1 = {
+            textAlign:'right',
+            fontSize: 13
+        };
+        var sty = {
+            float:'left'
+        };
+        var sty2 = {
+            float:'right'
+        };
+        var wrongPwd ={
+            color:'Red'
+        };
         return (
           <div>
             <div className='nav'>
@@ -29,10 +50,12 @@ class Login extends Component {
             </div>
 
             <div className='article'>
-              <h4 className='col-md-6'>Sign in</h4>
+
+              <h4 className='col-md-6' style={myStyle}>Sign in</h4>
+              <h4 style={myStyle1}> or <a href='/Signup'>create an account</a></h4>
 
                 <div className="row justify-content-md-center">
-                  <div className="col-md-8">
+                  <div className="col-md-10">
                     <form>
                         <div className="form-group">
                             <input className="form-control" type="text" label="Username" placeholder="Enter Username" value={this.state.username}
@@ -53,17 +76,14 @@ class Login extends Component {
                         </div>
 
                         <div className="row">
-                            <div className="col-xs-6 col-sm-6 col-md-6">
+                            <div className="checkbox">
+                                <label style={sty}><input style={myStyle2} type="checkbox" name="remember" />Remember me</label>
                                 <button className="btn btn-primary" type="button" onClick={() => this.props.handleSubmit(this.state)}>Sign in</button>
-                            </div>
-
-                            <div className="col-xs-6 col-sm-6 col-md-6">
-                                  <Link to="/SignUp" >
-                                          <button className="btn btn-primary" type="button">Sign Up</button>
-                                  </Link>
                             </div>
                         </div>
                     </form>
+                    <div><a href='#'> <h4 style={myStyle2}>Forgot your password?</h4></a></div>
+                    <br/><br/> <h3 style={wrongPwd}>{this.state.message}</h3>
                   </div>
                 </div>
              </div>

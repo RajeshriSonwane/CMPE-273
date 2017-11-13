@@ -6,11 +6,11 @@ class About extends Component {
 
     static propTypes = {
         handleUserDetails: PropTypes.func.isRequired,
-          email: PropTypes.string.isRequired
+          username: PropTypes.string.isRequired
     };
 
     state = {
-          email : '',
+        username : '',
         userOverview: '',
         work: '',
         education: '',
@@ -21,7 +21,7 @@ class About extends Component {
 
     componentWillMount(){
         this.setState({
-            email : this.props.email,
+          username : this.props.username,
           userOverview: '',
           work: '',
           education: '',

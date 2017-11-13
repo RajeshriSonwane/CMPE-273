@@ -4,7 +4,7 @@ var listDir = require('./services/listDir');
 var userSignUp = require('./services/userSignUp');
 var submitUserInfo = require('./services/submitUserInfo');
 
-var consumer = connection.getConsumer("topic2");
+var consumer = connection.getConsumer("topic3");
 var producer = connection.getProducer();
 
 console.log('server is running');
