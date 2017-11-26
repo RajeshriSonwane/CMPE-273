@@ -1,0 +1,33 @@
+md \data
+md \data\db
+mongod
+
+db.user.insert( { 'username' : 'Mike', 'password' : '1234' })
+db.user.find()
+db.user.update({'username' : 'Mike' }, { $set: { 'password' : '4321'}})
+
+db.login.insert({ 'username' : 'Mike' , 'lname' : 'mike' , 'email' : 'mike@gmail.com', 'password' : '1235' })
+
+db.files.insert({ 'username' : 'Mike' , 'DirName' : 'C:\Users\hp\Downloads\Demo_export (1)\Kafka Demo\kafkaDemo' })
+
+cd C:\Users\hp\Downloads\Kafka Demo\Kafka Demo\kafkaDemo\front-end
+npm start
+
+cd C:\Users\hp\Downloads\Kafka Demo\Kafka Demo\kafkaDemo\kafka-back-end
+npm start
+
+cd C:\Users\hp\Downloads\Kafka Demo\Kafka Demo\kafkaDemo\back-end
+npm start
+
+mongod
+
+zkserver
+
+cd C:\kafka_2.11-0.11.0.1
+.\bin\windows\kafka-server-start.bat .\config\server.properties
+
+.\bin\windows\kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test55response
+
+.\bin\windows\kafka-topics.bat --list --zookeeper localhost:2181
+
+.\bin\windows\kafka-topics.bat --zookeeper localhost:2181 --delete --topic test55
