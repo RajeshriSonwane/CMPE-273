@@ -29,28 +29,7 @@ class SignUp extends Component {
     }
 
     render() {
-        var myStyle = {
-            textAlign: 'left',
-            fontSize: 20
-        };
-        var myStyle2 = {
-            textAlign: 'left',
-            fontSize: 13
-        };
-        var myStyle1 = {
-            textAlign: 'right',
-            fontSize: 13
-        };
-        var sty = {
-            float: 'left'
-        };
-        var sty2 = {
-            float: 'right'
-        };
-        var wrongPwd = {
-            color: 'Red'
-        };
-        return (
+            return (
             <div>
                 <div className='nav' style={{"marginLeft": "278px"}}>
                     <img src={dropbox}/>
@@ -58,8 +37,8 @@ class SignUp extends Component {
 
                 <div className='article'>
 
-                    <h4 className='col-md-6' style={myStyle}>Sign up</h4>
-                    <h4 style={myStyle1}> or <a href='/login'>log in</a></h4>
+                    <h4 className='col-md-6' style={{textAlign: 'left', fontSize: 20}}>Sign up</h4>
+                    <h4 style={{textAlign: 'right', fontSize: 13}}> or <a href='/login'>log in</a></h4>
 
                     <div className="row justify-content-md-center">
                         <div className="col-md-10">
@@ -115,20 +94,11 @@ class SignUp extends Component {
                                                 onClick={() => this.props.handleSignUp(this.state)}>Sign Up
                                         </button>
                                     </div>
-
-                                    <Route exact path="/signup" render={() => (
-                                        <div className="col-xs-6 col-sm-6 col-md-6">
-                                            <button className="btn btn-primary" onClick={() => {
-                                                this.props.history.push("/about");
-                                            }}> About
-                                            </button>
-                                        </div>
-                                    )}/>
                                 </div>
 
                             </form>
 
-                            <br/><br/> <h3 style={wrongPwd}>{this.state.message}</h3>
+                            <br/><br/> <h3 style={{color: 'Red'}}>{this.state.message}</h3>
                         </div>
                     </div>
                 </div>

@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller    // This means that this class is a Controller
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = {"http://localhost:3000"})
 @RequestMapping(path="/user") // This means URL's start with /demo (after Application path)
 public class UserController {
     @Autowired
@@ -29,8 +29,8 @@ public class UserController {
         // @ResponseBody means the returned String is the response, not a view name
         // @RequestParam means it is a parameter from the GET or POST request
         userService.addUser(user);
-        System.out.println("Saved");
-        return new ResponseEntity(null,HttpStatus.CREATED);
+        System.out.println("Signup successfull");
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @GetMapping(path="/all",produces = MediaType.APPLICATION_JSON_VALUE)
@@ -42,10 +42,34 @@ public class UserController {
     @PostMapping(path="/login",consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> login(@RequestBody String user, HttpSession session)
     {
+    	System.out.println("Login Hit");
         JSONObject jsonObject = new JSONObject(user);
         session.setAttribute("name",jsonObject.getString("username"));
+         
+       List<User> b = userService.login(jsonObject.getString("username"),jsonObject.getString("password"));
+       System.out.println("if "+b.isEmpty());
+       if(b.isEmpty()){ 
+           return new ResponseEntity(HttpStatus.FORBIDDEN);
+       }else {
+           return new ResponseEntity(HttpStatus.OK);
+       }
+    }
+    
+    @PostMapping(path="/signup",consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> signup(@RequestBody User signupDetails)
+    {
+    	System.out.println("SignUp Hit");
+        JSONObject jsonObject = new JSONObject(signupDetails);
+         
+        String userName = jsonObject.getString("username");
+        String lastName = jsonObject.getString("lastname");
+        String email = jsonObject.getString("email");
+        String password = jsonObject.getString("password");
         
-       return new ResponseEntity(userService.login(jsonObject.getString("username"),jsonObject.getString("password")),HttpStatus.OK);
+        userService.addUser(signupDetails);
+        System.out.println("Saved");
+        return new ResponseEntity(null,HttpStatus.CREATED);
+         
     }
     
     @PostMapping(path="/list",consumes = MediaType.APPLICATION_JSON_VALUE)

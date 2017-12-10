@@ -17,19 +17,6 @@ class NewerHomePage extends Component {
         username: ''
     };
 
-    handleUserDetails = (userdata) => {
-        API.submitUserInfo(userdata)
-            .then((status) => {
-                if (status === 201) {
-                    this.setState({
-                        isLoggedIn: true,
-                        message: "Details Successfull!!",
-                        email: userdata.email
-                    });
-                }
-            });
-    };
-
     handleSignUp = (userdata) => {
         API.doSignUp(userdata)
             .then((status) => {
