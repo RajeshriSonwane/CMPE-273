@@ -19,6 +19,8 @@ class SignUp extends Component {
         password: ''
     };
 
+
+
     componentWillMount() {
         this.setState({
             username: '',

@@ -8,6 +8,7 @@ import dropboxIcon from '../images/Dropbox_icon.JPG';
 import SignUp from "./SignUp";
 import About from "./About";
 import UserAccount from "./UserAccount";
+import MyFiles from "./MyFiles";
 
 class NewerHomePage extends Component {
 
@@ -15,6 +16,19 @@ class NewerHomePage extends Component {
         isLoggedIn: false,
         message: '',
         username: ''
+    };
+
+    handleUserDetails = (userdata) => {
+        API.submitUserInfo(userdata)
+            .then((status) => {
+                if (status === 201) {
+                    this.setState({
+                        isLoggedIn: true,
+                        message: "Details Successfull!!",
+                        email: userdata.email
+                    });
+                }
+            });
     };
 
     handleSignUp = (userdata) => {
@@ -106,6 +120,11 @@ class NewerHomePage extends Component {
                 <Route exact path="/UserAccount" render={() => (
                     <div>
                         <UserAccount username={this.state.username} handleSubmit={this.handleSubmit}/>
+                    </div>
+                )}/>
+                <Route exact path="/MyFiles" render={() => (
+                    <div>
+                        <MyFiles handleLogout={this.handleLogout} username={this.state.username}/>
                     </div>
                 )}/>
 

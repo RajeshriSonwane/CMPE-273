@@ -42,19 +42,6 @@ class UserAccount extends Component {
             });
     };
 
-    handleUserDetails = (userdata) => {
-        API.submitUserInfo(userdata)
-            .then((status) => {
-                if (status === 201) {
-                    this.setState({
-                        isLoggedIn: true,
-                        message: "Details Successfull!!",
-                        email: userdata.email
-                    });
-                }
-            });
-    };
-
     componentWillMount() {
         this.setState({
             username: this.props.username,
@@ -142,13 +129,13 @@ class UserAccount extends Component {
                                 <hr/>
                                 <br/>
                                 <div className="row">
-                                    <a href="/about" onClick={() => this.props.handleUserDetails(this.state)} >
+                                    <a href="/about" onClick={() => this.props.handleUserDetails(this.state)}>
                                         Add User Details
                                     </a>
                                 </div>
                                 <br/>
                                 <div className="row">
-                                    <a href="#" onClick={() => this.props.handleUserDetails(this.state)} >
+                                    <a href="#" onClick={() => this.props.handleUserDetails(this.state)}>
                                         Display User Details
                                     </a>
                                 </div>

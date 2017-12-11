@@ -6,12 +6,12 @@ import file from '../images/file.JPG';
 import folder from '../images/folder.JPG';
 import ImageGridList from "./ImageGridList";
 import UserAccount from "./UserAccount";
-import MyFiles from './UserAccount';
 import About from "./About";
 import * as API from '../api/API';
 import {Route, withRouter} from 'react-router-dom';
+import Welcome from './Welcome';
 
-class Welcome extends Component {
+class MyFiles extends Component {
 
     static propTypes = {
         username: PropTypes.string.isRequired,
@@ -56,14 +56,6 @@ class Welcome extends Component {
                     fileStructure: res[1]
                 });
             });
-    };
-
-    handleMyFiles = (userdata) => {
-        this.setState({
-            username : this.state.username
-        });
-        this.props.history.push("/MyFiles");
-
     };
 
     componentWillMount() {
@@ -130,7 +122,7 @@ class Welcome extends Component {
                                     paddingTop: 10,
                                     paddingLeft: 10,
                                     color: '#4779DC'
-                                }} onClick={() => this.handleMyFiles(this.state)}>My Files</h4></a>
+                                }} onClick={() => this.handleListDirectory(this.state)}>My Files</h4></a>
                                 <a href={Welcome}><h4 style={{
                                     paddingTop: 10,
                                     paddingLeft: 10,
@@ -148,32 +140,107 @@ class Welcome extends Component {
                                     <input type="text" className="form-control" placeholder="Search"/>
                                     <span className="input-group-addon">
 
-                                        </span>
+                                    </span>
                                 </div>
-                                <h3 style={{textAlign: 'left'}}>Home</h3><br/>
-                                <h5 style={{textAlign: 'left'}}>Starred</h5>
                                 <hr/>
-                                <br/>
-                                <hr/>
-                                <h5 style={{textAlign: 'left'}} onClick={() => this.handleListDirectory(this.state)}>
-                                    Recent files</h5>
-                                <br/>
-                                <ul>
 
-                                    {this.state.dirStructure.map((task, i) =>
+                                <div className="row justify-left">
+                                    <div className="col-md-6">
+                                        <h6>Name</h6>
+                                    </div>
+                                    <div className="col-md-2">
+                                        <h6>Modified</h6>
+                                    </div>
+                                    <div className="col-md-2">
+                                        <h6>Members</h6>
+                                    </div>
+                                </div>
+                                <hr/>
+                                <ul>
+                                    {this.state.fileStructure.map((task, i) =>
                                         <div className="row justify-left">
                                             <div className="col-md-1" key={i}>
-                                                <img src={file} width="42" height="42" style={{marginLeft: 8}}/>
+                                                <input style={{
+                                                    textAlign: 'left',
+                                                    fontSize: 25,
+                                                    marginRight: 10,
+                                                    marginTop: 15,
+                                                }} type="checkbox"/>
                                             </div>
-                                            <div className="col-md-9" style={{
+                                            <div className="col-md-1">
+                                                <img src={folder}/>
+                                            </div>
+                                            <div className="col-md-4" style={{
                                                 "marginTop": "10",
                                                 "marginBottom": "10",
                                                 textAlign: 'left'
                                             }}>
                                                 {task}
                                             </div>
-                                            <div className="col-md-2">
-                                                <h4>...</h4>
+                                            <div className="col-md-2" style={{
+                                                "marginTop": "10",
+                                                "marginBottom": "10",
+                                                textAlign: 'left'
+                                            }}>
+                                                <h6>9/21/2017 12.30 AM</h6>
+                                            </div>
+                                            <div className="col-md-2" style={{
+                                                "marginTop": "10",
+                                                "marginBottom": "10",
+                                                textAlign: 'left'
+                                            }}>
+                                                <h6> Only you</h6>
+                                            </div>
+                                            <div className="col-md-2" style={{
+                                                "marginTop": "10",
+                                                "marginBottom": "10",
+                                                textAlign: 'left'
+                                            }}>
+                                                <button className="btn">Share</button>
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {this.state.dirStructure.map((task, i) =>
+                                        <div className="row justify-left">
+                                            <div className="col-md-1" key={i}>
+                                                <input style={{
+                                                    textAlign: 'left',
+                                                    fontSize: 25,
+                                                    marginRight: 10,
+                                                    marginTop: 15,
+                                                }} type="checkbox"/>
+                                            </div>
+                                            <div className="col-md-1">
+                                                <img src={file} width="42" height="42" style={{marginLeft: 8}}/>
+                                            </div>
+                                            <div className="col-md-4" style={{
+                                                "marginTop": "10",
+                                                "marginBottom": "10",
+                                                textAlign: 'left'
+                                            }}>
+                                                {task}
+                                            </div>
+                                            <div className="col-md-2" style={{
+                                                "marginTop": "10",
+                                                "marginBottom": "10",
+                                                textAlign: 'left'
+                                            }}>
+                                                <h6>12/03/2017 2.10 AM</h6>
+                                            </div>
+                                            <div className="col-md-2" style={{
+                                                "marginTop": "10",
+                                                "marginBottom": "10",
+                                                textAlign: 'left'
+                                            }}>
+                                                <h6> Only you</h6>
+                                            </div>
+                                            <div className="col-md-2" style={{
+                                                "marginTop": "10",
+                                                "marginBottom": "10",
+                                                textAlign: 'left'
+                                            }}>
+                                                <button className="btn">Share</button>
                                             </div>
                                         </div>
                                     )}
@@ -211,15 +278,9 @@ class Welcome extends Component {
                         </div>
                     </div>
                 </div>
-                <Route exact path="/Welcome" render={() => (
-                    <div>
-                        <MyFiles handleLogout={this.handleLogout} username={this.state.username}/>
-                    </div>
-                )}/>
             </div>
-
         )
     }
 }
 
-export default withRouter(Welcome);
+export default withRouter(MyFiles);

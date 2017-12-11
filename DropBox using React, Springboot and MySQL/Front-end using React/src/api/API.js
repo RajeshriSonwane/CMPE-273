@@ -24,7 +24,7 @@ export const doLogin = (payload) =>
         });
 
 export const doSignUp = (payload) => {
-    return fetch(`${api}/user/add`, {
+    return fetch(`${api}/user/signup`, {
         method: 'POST',
         headers: {
             ...headers,
@@ -81,7 +81,7 @@ export const getImages = () =>
 
 
 export const doGetDirectory = (payload) =>
-    fetch(`${api}/listdir`, {
+    fetch(`${api}/user/list`, {
         method: 'POST',
         headers: {
             ...headers,

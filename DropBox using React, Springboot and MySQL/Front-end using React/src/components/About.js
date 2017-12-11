@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {Link, withRouter} from 'react-router-dom';
+import * as API from '../api/API';
 
 class About extends Component {
 
     static propTypes = {
-        handleUserDetails: PropTypes.func.isRequired,
         username: PropTypes.string.isRequired
     };
 
@@ -17,6 +17,20 @@ class About extends Component {
         ContactNo: '',
         lifeEvents: '',
         interests: ''
+    };
+
+
+    handleUserDetails = (userdata) => {
+        API.submitUserInfo(userdata)
+            .then((status) => {
+                if (status === 201) {
+                    this.setState({
+                        isLoggedIn: true,
+                        message: "Details Successfull!!",
+                        email: userdata.email
+                    });
+                }
+            });
     };
 
     componentWillMount() {
@@ -113,7 +127,7 @@ class About extends Component {
                         <div className="form-group">
                             <button
                                 className="btn btn-primary" type="button"
-                                onClick={() => this.props.handleUserDetails(this.state)}>
+                                onClick={() => this.handleUserDetails(this.state)}>
                                 Submit
                             </button>
                         </div>
