@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Local Storage Demo</title>
+</head>
+<body>
+	<script>
+		myLocalStorage = window.localStorage;
+		if (typeof (Storage) !== "undefined") {
+
+			myLocalStorage.setItem("Country", "USA");
+			myLocalStorage.setItem("Address", "San JOse");
+			myLocalStorage.setItem("Street", "Colonnade");
+
+			var countryName = myLocalStorage.getItem("Country");
+			var countryAddress = myLocalStorage.getItem("Address");
+
+			document.write(countryName + ", " + countryAddress);
+		} else {
+			document.write("Web Storage is not supported by your browser !!!");
+		}
+	</script>
+</body>
+</html>

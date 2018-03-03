@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Calculate Simple Interest</title>
+</head>
+<body>
+	<h2>Simple Interest calculation</h2>
+	<p id="text"></p>
+	<script>
+		function calSimpleInterest(principle, rate, time) {
+			var rateOfInterest = rate / 100;
+			return principle * rateOfInterest * time;
+		}
+		document.getElementById("text").innerHTML = calSimpleInterest(100, 2, 5);
+	</script>
+
+</body>
+</html>

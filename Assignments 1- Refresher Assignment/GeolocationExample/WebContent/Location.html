@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Geolocation Demo</title>
+</head>
+<body>
+
+	<button onclick="getMyLocation()">Get My Location</button>
+
+	<p id="text"></p>
+
+	<script>
+		function getMyLocation() {
+			if (navigator.geolocation) {		
+				navigator.geolocation.getCurrentPosition(function(position) {
+					var lat = position.coords.latitude;
+					var longt = position.coords.longitude;
+					
+					document.getElementById("text").innerHTML = "Latitude: " + lat
+					+ " , Longitude: " + longt;
+				}
+				
+			}
+		}
+	</script>
+
+</body>
+</html>

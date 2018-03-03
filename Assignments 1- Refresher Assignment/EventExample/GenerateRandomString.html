@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Random String generation</title>
+</head>
+<body>
+	<h3>Click to Generate a random String </h3>
+
+	<button onclick="genRandomNum()">Click me</button>
+	<p id="result"></p>
+	<script>
+		function genRandomNum() {
+			var len = 8;
+			var charsArray = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+			var resultString = '';
+			for (var i = len; i > 0; --i)
+				resultString += charsArray[Math.floor(Math.random()
+						* charsArray.length)];
+			document.getElementById("result").innerHTML = resultString;
+		}
+	</script>
+
+</body>
+</html>

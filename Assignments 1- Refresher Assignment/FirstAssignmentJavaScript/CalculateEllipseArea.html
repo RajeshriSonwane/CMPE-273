@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Area of ellipse</title>
+</head>
+<body>
+	<h3>Enter the Major axis length and minor axis length :</h3>
+
+	<form name="form1">
+		Major Axis : <input type="number" name="majorAxisLen" size=10><br>
+		Minor Axis : <input type="number" name="minorAxisLen" size=10><br>
+		<input type="submit" value="Calculate Area">
+	</form>
+
+	<p id="text">Area = </p>
+	<input type="button" value="Calculate Area"
+		onClick='document.getElementById("text").innerHTML=calArea()'>
+</body>
+</html>
